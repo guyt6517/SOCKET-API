@@ -31,7 +31,7 @@ def remove():
     abort(200)
 
 
-@app.route("/clearInd")
+@app.route("/clear-index")
 def clear():
     x = open("onlineAddrs", "w")
     x.write("")

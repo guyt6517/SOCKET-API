@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 #os.path.exists(filename)
 
-secKEY = os.getenv("SECRET")
+secKey = os.getenv("SECRET")
 
 @app.before_request
 def check_auth():

@@ -30,6 +30,12 @@ def remove():
     open("onlineAddrs", "w").write(str(addrs).replace("[", "").replace("]", "").replace(",", ""))
     abort(200)
 
+
+@app.route("/clearInd")
+def clear():
+    x = open("onlineAddrs", "w")
+    x.write("")
+    x.close()
 @app.route("/addrs")
 def returnAddrs():
     addrs = str(open("onlineAddrs", "r").read()).split("\n")

@@ -67,3 +67,6 @@ def upload():
     
     open("fileContent.txt", "w").write(data.get('code'))
     return jsonify("Success"), 200
+
+if __name__ == "__main__":
+    app.run(debug=True)

@@ -20,16 +20,18 @@ def add():
     o = open("onlineAddrs", "a")
     o.write(f'{request.remote_addr}\n')
     o.close()
-    abort(200)
+    return jsonify("OK"), 200
 
 @app.route("/addrs-remove")
 def remove():
-    addrs = str(open("onlineAddrs", "r").read()).split("\n")
-    incomingReqIp = str(request.remote_addr)
-    addrs.remove(f'{request.remote_addr}\n')
-    open("onlineAddrs", "w").write(str(addrs).replace("[", "").replace("]", "").replace(",", ""))
-    abort(200)
-
+    incoming = request.remote_addr
+    with open("onlineAddrs", "r") as f:
+        addrs = [x.strip() for x in f.readlines() if x.strip()]
+    if incoming in addrs:
+        addrs.remove(incoming)
+    with open("onlineAddrs", "w") as f:
+        f.write("\n".join(addrs))
+    return jsonify("Removed"), 200
 
 @app.route("/clear-index")
 def clear():
